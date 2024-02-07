@@ -210,16 +210,16 @@ namespace GA_LinkedList_ArmanSahota
                 throw new IndexOutOfRangeException();
             }
 
-            LinkedListNode<T> newNode = new LinkedListNode<T>(data);
+            LinkedListNode<T> newNode = new LinkedListNode<T>(data); // starting with the new node
 
-            if (index == 0)
+            if (index == 0) // if there is currently nothing in the index
             {
                 newNode.Next = head;
-                head = newNode;
+                head = newNode; // new node is head node
             }
             else
             {
-                LinkedListNode<T> current = head;
+                LinkedListNode<T> current = head; // else start at the head node and once you get to the index everything else moves up 1
                 for (int i = 0; i < index - 1; i++)
                 {
                     current = current.Next;
@@ -232,7 +232,7 @@ namespace GA_LinkedList_ArmanSahota
             count++;
         }
 
-        // Insert an element at the beginning (front) of the linked list.
+        // Insert an element at the head of the linked list.
         public void InsertAtFront(T data)
         {
             LinkedListNode<T> newNode = new LinkedListNode<T>(data);
@@ -262,7 +262,7 @@ namespace GA_LinkedList_ArmanSahota
                     current = current.Next;
                 }
 
-                // Update the last node's "Next" reference to point to the new node.
+                // Update the last nodes "Next" reference to point to the new node.
                 current.Next = newNode;
             }
 
