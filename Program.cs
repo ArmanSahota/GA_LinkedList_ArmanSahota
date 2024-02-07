@@ -9,6 +9,7 @@ namespace GA_LinkedList_ArmanSahota
         {
             LinkedList<int> linkedList = new LinkedList<int>();
 
+            // Adding elements to the linked list
             linkedList.Add(10);
             linkedList.Add(20);
             linkedList.Add(30);
@@ -34,20 +35,34 @@ namespace GA_LinkedList_ArmanSahota
             Console.WriteLine("Updated Linked List elements:");
             linkedList.Display();
 
+            // Testing the new methods
+            Console.WriteLine("Inserting 15 at index 1:");
+            linkedList.InsertAtIndex(15, 1);
+            linkedList.Display();
+
+            Console.WriteLine("Inserting 5 at the front:");
+            linkedList.InsertAtFront(5);
+            linkedList.Display();
+
+            Console.WriteLine("Inserting 40 at the end:");
+            linkedList.InsertAtEnd(40);
+            linkedList.Display();
+
             Console.ReadLine();
         }
     }
 
-    class LinkedList<T> 
-    { 
 
-        
+    class LinkedList<T>
+    {
+
+
         class LinkedListNode<T> // nodes in a linked list 
         {
             public T Value { get; set; }        // Node value
             public LinkedListNode<T> Next { get; set; } // Next node
 
-            
+
             public LinkedListNode(T value)
             {
                 Value = value;  // Node data
@@ -77,13 +92,13 @@ namespace GA_LinkedList_ArmanSahota
             //  Create a new node with the given value
             LinkedListNode<T> newNode = new LinkedListNode<T>(value);
 
-            
-             // If head is null list is empy and we need to create a new node
+
+            // If head is null list is empy and we need to create a new node
             if (head == null)
             {
                 // create new node and make it the head node
                 head = newNode;
-            } 
+            }
             else
             {
                 // start at head of the node
@@ -161,7 +176,7 @@ namespace GA_LinkedList_ArmanSahota
             // if null return false
             return false;
         }
-       
+
         public T this[int index] // get value at a specific index.
         {
             get
@@ -187,6 +202,76 @@ namespace GA_LinkedList_ArmanSahota
                 return current.Value;
             }
         }
-    }
 
+        public void InsertAtIndex(T data, int index)
+        {
+            if (index < 0 || index > count)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+            LinkedListNode<T> newNode = new LinkedListNode<T>(data);
+
+            if (index == 0)
+            {
+                newNode.Next = head;
+                head = newNode;
+            }
+            else
+            {
+                LinkedListNode<T> current = head;
+                for (int i = 0; i < index - 1; i++)
+                {
+                    current = current.Next;
+                }
+
+                newNode.Next = current.Next;
+                current.Next = newNode;
+            }
+
+            count++;
+        }
+
+        // Insert an element at the beginning (front) of the linked list.
+        public void InsertAtFront(T data)
+        {
+            LinkedListNode<T> newNode = new LinkedListNode<T>(data);
+
+            newNode.Next = head;
+            head = newNode;
+
+            count++;
+        }
+
+        // Insert an element at the end of the linked list.
+        public void InsertAtEnd(T data)
+        {
+            LinkedListNode<T> newNode = new LinkedListNode<T>(data);
+
+            if (head == null)
+            {
+                // If the list is empty, make the new node the head.
+                head = newNode;
+            }
+            else
+            {
+                // If the list is not empty, traverse to find the last node.
+                LinkedListNode<T> current = head;
+                while (current.Next != null)
+                {
+                    current = current.Next;
+                }
+
+                // Update the last node's "Next" reference to point to the new node.
+                current.Next = newNode;
+            }
+
+            count++;
+        }
+
+
+
+
+    }
 }
+
